@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
+using MVC5Course.Models.ViewModels;
 
 namespace MVC5Course.Controllers
 {
@@ -113,6 +114,19 @@ namespace MVC5Course.Controllers
             db.Product.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult List()
+        {
+            var model = from p in db.Product
+                        select new ProductListViewModel()
+                        {
+                            ProductId = p.ProductId,
+                            Price = p.Price,
+                            ProductName = p.ProductName,
+                            Stock = p.Stock
+                        };
+            return View(model);
         }
 
         protected override void Dispose(bool disposing)
