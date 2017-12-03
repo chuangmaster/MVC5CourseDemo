@@ -18,6 +18,11 @@ namespace MVC5Course
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //移除所有Form、Razor View 
+            ViewEngines.Engines.Clear();
+            //只加回Razor View
+            ViewEngines.Engines.Add(new RazorViewEngine());
         }
     }
 }
