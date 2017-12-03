@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
-    public class ARController : Controller
+    public class ARController : BaseController
     {
         public ActionResult Index()
         {
@@ -43,12 +43,36 @@ namespace MVC5Course.Controllers
             }
         }
 
-        //public ActionResult FileTest()
-        //{
+        public ActionResult JsonTest()
+        {
+            var data = from p in repo.GetTop10()
+                       select new
+                       {
+                           p.ProductId,
+                           p.ProductName,
+                           p.Price
+                       };
 
-        //    //ContentType:請查閱 http://www.freeformatter.com/mime-types-list.html
-        //    return File(Server.MapPath("~/App_Data/switch.jpg"), "image/jpeg", "Switch.jpg");
-        //}
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
 
+        public ActionResult RedirectTest()
+        {
+            return RedirectToAction("FileTest", new
+            {
+                dl = 1
+            });
+        }
+
+
+        public ActionResult RedirectTest2()
+        {
+            return RedirectToRoute("FileTest", new
+            {
+                controller = "Home",
+                action = "About",
+                id = 123
+            });
+        }
     }
 }
