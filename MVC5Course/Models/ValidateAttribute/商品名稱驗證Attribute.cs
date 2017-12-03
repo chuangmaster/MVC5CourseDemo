@@ -9,11 +9,13 @@ namespace MVC5Course.Models.ValidateAttribute
 {
     public class 商品名稱驗證Attribute : DataTypeAttribute
     {
-        //private static Regex _regex = new Regex("[]", RegexOptions.IgnoreCase);
+        //private static Regex _regex = new Regex("[]", RegexOptions.IgnoreCase);
+
         public 商品名稱驗證Attribute() : base(DataType.Text)
         {
 
-        }
+        }
+
         public override bool IsValid(object value)
         {
             if (value == null)
@@ -23,7 +25,8 @@ namespace MVC5Course.Models.ValidateAttribute
 
             string str = (string)value;
             //return valueAsString != null && _regex.Match(valueAsString).Length > 0;
-            return str.Contains("[商品]") ? true : false;
-        }
+            return str.Contains("[Product]") ? true : false;
+        }
+
     }
 }

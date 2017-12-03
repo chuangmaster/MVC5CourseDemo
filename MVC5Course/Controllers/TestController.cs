@@ -10,14 +10,12 @@ namespace MVC5Course.Controllers
     public class TestController : Controller
     {
         FabricsEntities db = new FabricsEntities();
+        ProductRepository repo = RepositoryHelper.GetProductRepository();
         // GET: Test
         public ActionResult Index()
         {
-            var result = from i in db.Product
-                         where i.IsDeleted == false
-                         orderby i.ProductId descending
-                         select i;
-            return View(result.Take(100));
+            var data = repo.All();
+            return View(data);
         }
 
         public ActionResult Create()
@@ -30,8 +28,8 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Product.Add(product);
-                db.SaveChanges();
+                repo.Add(product);
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -42,7 +40,7 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
-                var data = db.Product.Find(id);
+                var data = repo.Find(id);
                 return View(data);
             }
             return View("Index");
@@ -53,13 +51,13 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
-                var data = db.Product.Find(product.ProductId);
+                var data = repo.Find(product.ProductId);
                 data.Active = product.Active;
                 data.OrderLine = product.OrderLine;
                 data.Price = product.Price;
                 data.ProductName = product.ProductName;
                 data.Stock = product.Stock;
-                db.SaveChanges();
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
             return View();
@@ -67,16 +65,21 @@ namespace MVC5Course.Controllers
 
         public ActionResult Details(int id)
         {
-            return View(db.Product.Find(id));
+            return View(repo.Find(id));
         }
 
+        
         public ActionResult Delete(int id)
         {
-            var productData = db.Product.Find(id);
-            //db.OrderLine.RemoveRange(productData.OrderLine.ToList());
-            //db.Product.Remove(productData);
-            productData.IsDeleted = true;
-            db.SaveChanges();
+            //var olRepo = RepositoryHelper.GetOrderLineRepository(repo.UnitOfWork);
+            //olRepo.Delete(olRepo.All().First(p => p.OrderId == 1));
+
+            //var olRepo = new OrderLineRepository();
+            //olRepo.UnitOfWork = repo.UnitOfWork;
+            //olRepo.Delete(olRepo.All().First(p => p.OrderId == 1));
+            var data = repo.Find(id);
+            data.IsDeleted = true;
+            repo.UnitOfWork.Commit();            
             return RedirectToAction("Index");
         }
     }
