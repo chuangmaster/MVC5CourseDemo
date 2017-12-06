@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-<a href="/AR/FileTest?dl=1">
-    <img src="/AR/FileTest">
+<a href="@Url.Action("FileTest","AR",new { dl=1})">
+    <img src="@Url.Action("FileTest","AR")">
 </a>
 
