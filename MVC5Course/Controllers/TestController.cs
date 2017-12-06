@@ -56,6 +56,7 @@ namespace MVC5Course.Controllers
                 data.ProductName = product.ProductName;
                 data.Stock = product.Stock;
                 repo.UnitOfWork.Commit();
+                TempData["ProductItem"] = product;
                 return RedirectToAction("Index");
             }
             return View();

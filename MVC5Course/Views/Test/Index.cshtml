@@ -2,6 +2,11 @@
 
 @{
     ViewBag.Title = "Index";
+    if (TempData["ProductItem"] != null)
+    {
+        var item = TempData["ProductItem"] as MVC5Course.Models.Product;
+        <pre>@item.ProductName 成功更新</pre>
+    }
 }
 
 <h2>Index</h2>
