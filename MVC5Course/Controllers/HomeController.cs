@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC5Course.ActionFilter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,8 @@ using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
+
+    [LocalOnly]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -13,10 +16,9 @@ namespace MVC5Course.Controllers
             return View();
         }
 
+        [ShareData]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
