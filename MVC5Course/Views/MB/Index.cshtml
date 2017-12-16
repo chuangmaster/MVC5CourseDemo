@@ -9,7 +9,9 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@*@using (Html.BeginForm("Index", "MB", FormMethod.Post))*@
 @using (Html.BeginForm("Index"))
+
 {
     <table class="table">
         <tr>
@@ -30,7 +32,7 @@
             </th>
             <th></th>
         </tr>
-        @{ 
+        @{
             var batch = Model.ToArray();
             int i = 0;
         }
@@ -64,4 +66,4 @@
         }
     </table>
     <input type="submit" value="批次更新" />
-}
+            }
