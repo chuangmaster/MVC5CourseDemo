@@ -28,6 +28,7 @@ namespace MVC5Course.Controllers
         }
 
         [HttpPost]
+        [HandleError(ExceptionType = typeof(DbEntityValidationException), View = "Error_DbEntityValidationException")]
         public ActionResult Index(List<MB_ProductParameter> batch)
         {
             if (ModelState.IsValid)
@@ -43,14 +44,7 @@ namespace MVC5Course.Controllers
                         product.ProductName = item.ProductName;
                         product.Active = item.Active;
                     }
-                    try
-                    {
-                        repo.UnitOfWork.Commit();
-                    }
-                    catch (DbEntityValidationException ex)
-                    {
-                        throw;
-                    }
+                    repo.UnitOfWork.Commit();
                 }
             }
 
