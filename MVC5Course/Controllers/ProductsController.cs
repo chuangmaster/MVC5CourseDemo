@@ -132,8 +132,10 @@ namespace MVC5Course.Controllers
                         };
             return View(model);
         }
-        
 
+        #if DEBUG
+            [NonAction]
+        #endif
         protected override void Dispose(bool disposing)
         {
             if (disposing)
