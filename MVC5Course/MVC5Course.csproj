@@ -568,6 +568,8 @@
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Clients\DisplayTemplates\Client.cshtml" />
     <Content Include="Views\Clients\EditorTemplates\View.cshtml" />
+    <Content Include="Views\Clients\DisplayTemplates\Gender.cshtml" />
+    <Content Include="Views\Clients\DisplayTemplates\CreditRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
