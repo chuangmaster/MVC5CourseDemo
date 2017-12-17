@@ -45,7 +45,7 @@ namespace MVC5Course.Controllers
             items.Add(new SelectListItem() { Text = "10", Value = "10" });
             items.Add(new SelectListItem() { Text = "20", Value = "20" });
             items.Add(new SelectListItem() { Text = "30", Value = "30" });
-            var priceList = new SelectList(items, "Text", "Valuse");
+            var priceList = new SelectList(items, "Text", "Value");
             ViewBag.Price = items;
             return View();
         }
@@ -68,7 +68,7 @@ namespace MVC5Course.Controllers
             items.Add(new SelectListItem() { Text = "10", Value = "10" });
             items.Add(new SelectListItem() { Text = "20", Value = "20" });
             items.Add(new SelectListItem() { Text = "30", Value = "30" });
-            var priceList = new SelectList(items, "Text", "Valuse");
+            var priceList = new SelectList(items, "Text", "Value");
             ViewBag.Price = items;
             return View(product);
         }
@@ -87,7 +87,7 @@ namespace MVC5Course.Controllers
             }
             //從DB取得所有的Price當作SelectList
             var priceList = (from item in db.Product select new { text = item.Price, value = item.Price }).Distinct().OrderBy(x => x.value);
-            ViewBag.Price = new SelectList(priceList, "text", "value", product.Price);
+            ViewBag.Price = new SelectList(priceList, "text", "value");
             return View(product);
         }
 
