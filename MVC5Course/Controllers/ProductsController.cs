@@ -40,6 +40,13 @@ namespace MVC5Course.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
+            var items = new List<SelectListItem>();
+            items.Add(new SelectListItem() { Text = "0", Value = "0" });
+            items.Add(new SelectListItem() { Text = "10", Value = "10" });
+            items.Add(new SelectListItem() { Text = "20", Value = "20" });
+            items.Add(new SelectListItem() { Text = "30", Value = "30" });
+            var priceList = new SelectList(items, "Text", "Valuse");
+            ViewBag.Price = items;
             return View();
         }
 
@@ -56,7 +63,13 @@ namespace MVC5Course.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            var items = new List<SelectListItem>();
+            items.Add(new SelectListItem() { Text = "0", Value = "0" });
+            items.Add(new SelectListItem() { Text = "10", Value = "10" });
+            items.Add(new SelectListItem() { Text = "20", Value = "20" });
+            items.Add(new SelectListItem() { Text = "30", Value = "30" });
+            var priceList = new SelectList(items, "Text", "Valuse");
+            ViewBag.Price = items;
             return View(product);
         }
 
@@ -72,6 +85,9 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
+            //從DB取得所有的Price當作SelectList
+            var priceList = (from item in db.Product select new { text = item.Price, value = item.Price }).Distinct().OrderBy(x => x.value);
+            ViewBag.Price = new SelectList(priceList, "text", "value", product.Price);
             return View(product);
         }
 
@@ -134,9 +150,9 @@ namespace MVC5Course.Controllers
             return View(model);
         }
 
-        #if !DEBUG
+#if !DEBUG
         [NonAction]
-        #endif
+#endif
         protected override void Dispose(bool disposing)
         {
             if (disposing)
