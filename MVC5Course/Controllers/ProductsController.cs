@@ -33,6 +33,7 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.OrderLines = product.OrderLine.ToList();
             return View(product);
         }
 
