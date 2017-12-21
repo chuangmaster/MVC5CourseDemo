@@ -1,0 +1,18 @@
+﻿@model Nullable<System.DateTime>
+@if (Model.HasValue)
+{
+    //因為我們採用的是template所以不希望，我們的name位置被綁定，因此我們採用空字串由執行的時候動態載入
+    @Html.TextBox("", Model.Value.ToString("yyyy-MM-dd"), new { @class = "form-control text-box single-line" })
+}
+else
+{
+    @Html.TextBox("", null, new { @class = "form-control text-box single-line" })
+}
+
+<script>
+    $(function () {
+        $("#@Html.Id("")").datepicker({
+            dateFormat: "yyyy-mm-dd"
+        });
+    })
+</script>

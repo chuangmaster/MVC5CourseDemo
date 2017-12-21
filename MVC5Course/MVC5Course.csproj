@@ -570,6 +570,7 @@
     <Content Include="Views\Clients\EditorTemplates\View.cshtml" />
     <Content Include="Views\Clients\DisplayTemplates\Gender.cshtml" />
     <Content Include="Views\Clients\DisplayTemplates\CreditRating.cshtml" />
+    <Content Include="Views\Clients\EditorTemplates\DateOfBirth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
