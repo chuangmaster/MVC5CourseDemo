@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,9 +17,11 @@ namespace MVC5Course.Controllers
         private FabricsEntities db = new FabricsEntities();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int pageNo = 1)
         {
-            return View(db.Product.ToList());
+            var ordered = db.Product.ToList().OrderBy(x => x.ProductId);
+            var data = ordered.ToPagedList(pageNo, 10);
+            return View(data);
         }
 
         // GET: Products/Details/5

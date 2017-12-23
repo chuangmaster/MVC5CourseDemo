@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MVC5Course.Models.Product>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IEnumerable<MVC5Course.Models.Product>
 
 @{
     ViewBag.Title = "Index";
@@ -42,7 +44,7 @@
                 @if (item.Stock < 1000)
                 {
                     @:<strong style="color:red">
-                }
+                    }
                 @Html.DisplayFor(modelItem => item.Stock)
                 @if (item.Stock < 1000)
                 {
@@ -58,3 +60,7 @@
     }
 
 </table>
+@{
+    var pagedListData = Model as IPagedList;
+}
+@Html.PagedListPager(pagedListData, (p) => Url.Action("index", new { pageNo = p }), PagedListRenderOptions.MinimalWithPageCountText)
