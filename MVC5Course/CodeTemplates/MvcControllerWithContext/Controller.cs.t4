@@ -90,7 +90,7 @@ namespace <#= Namespace #>
 <#		if (UseAsync) { #>
             return View(await <#= entitySetVar #>.ToListAsync());
 <#		} else { #>
-            return View(<#= entitySetVar #>.OrderBy(=>p.<#=primaryKeyName#>).ToPagedList(pageNo, 10));
+            return View(<#= entitySetVar #>.OrderBy(p=> p.<#=primaryKeyName#>).ToPagedList(pageNo, 10));
 <#		} #>
 <# } else { #>
 <#		if (UseAsync) { #>
