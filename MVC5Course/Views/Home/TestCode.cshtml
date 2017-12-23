@@ -1,4 +1,4 @@
-﻿
+﻿@using Microsoft.Security.Application
 @{
     Layout = "";
     var a = "<h1>Hello 哈囉 World</h1>";
@@ -6,7 +6,7 @@
 @a
 <hr />
 @Html.Raw(a)
-<a href="/Home/TestCode?html=@(a)">content</a> 錯誤
+<a href="/Home/TestCode?html=@(a)">錯誤content</a>
 <hr />
 <a href="/Home/TestCode?html=@Url.Encode(a)">content</a>
 <hr />
@@ -14,14 +14,20 @@
     var path = "/Home/首頁";
 }
 <a href="@HttpUtility.UrlPathEncode(path)?html=@Url.Encode(a)">content</a>
-
+<hr />
 @{
     var msg = @"新增成功！
 
 Hello";
 }
 
-
 <script>
      alert('@Ajax.JavaScriptStringEncode(msg)');
 </script>
+
+@{
+
+    var xss = "<h1>Hello <script>alert('xss atteck!');</script></h1>";
+}
+@Html.Raw(Encoder.HtmlEncode(xss))  @*會編碼成純文字輸出，不用擔心javascript運作*@
+@Html.Raw(Sanitizer.GetSafeHtmlFragment(xss))  @*有清潔功能:會將javascript過濾掉*@
