@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Details";
+    if (IsAjax)
+    {
+        Layout = "";
+    }
 }
 
 <h2>Details</h2>
@@ -12,7 +16,6 @@
     @*@Html.DisplayFor(m => m)*@
     @*兩種寫法*@
     @Html.DisplayFor(m => m)
-
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ClientId }) |
